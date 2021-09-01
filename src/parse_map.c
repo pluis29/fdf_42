@@ -19,19 +19,25 @@ void	parse_map(char *map)
 	i = 0;
 	get_width(map);//largura
 	get_height(map);//altura
+	malloc_mtz(imap);
 	fd = open(map, O_RDONLY);
-	if (fd == -1)
+	if (!fd)
 		handle_error("open error");
-	imap->mtx = malloc(sizeof(int **) * imap->height)//malloc (ponteiro triplo)
-	if (!imap->mtx)
+	imap->mtz = (int **)malloc(sizeof(int *) * imap->height);
+	if (!imap->mtz)
 		handle_error("malloc error");
-	while (get_next_line(fd, &line))
+	while(i++ < imap->height)
 	{
-		imap->mtx[i] = malloc(sizeof(int *) * imap->width);
-		if (!imap->mtx)
+		imap->mtz[i] = (int *)malloc(sizeof(int) * imap->width);
+		if (!imap->mtz[i])
 			handle_error("malloc error");
-		fill_mtx(imap->mtx[i], line, imap->width);
-		free(line);
+	}
+	i = 0;
+	while (get_next_line(fd, &line)
+	{
+		set_mtz(imap, line, imap->mtz[i])
+		i++;
+		imap->info++;
 	}
 }
 
@@ -77,7 +83,17 @@ static void	get_height(char *map)
 		handle_error("close error");
 }
 
-static void	fill_mtx(int **mtx, char *line, int width)
+static void	set_mtz(t_imap *imap, char *line, int **mtz)
 {
-	
+	char	*split;
+	char	*tmp;
+	int		i;
+
+	i = 0;
+	split = st_split(line, ' ');//splitou a linha
+	while (split[i++] && i < imap->width)
+	{
+		tmp[i] = filter(split[i]);
+		imap->mtz[imap->info] == ft_strjoin(imap->mtz[imap->info], split[i]);
+	}
 }

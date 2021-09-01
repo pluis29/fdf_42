@@ -17,6 +17,7 @@ typedef struct	s_imap
 {
 	int		width;
 	int		height;
+	int		**mtz;
 }	t_imap;
 
 #endif

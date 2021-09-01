@@ -15,6 +15,6 @@
 int	main(int ac, char *av[])
 {
 	if (ac != 2)
-		Handle_error("Usage invalid: ./fdf 'map'", 1);
+		handle_error("Usage invalid: ./fdf 'map'", 1);
 	parse_map(av[1]);
 }
