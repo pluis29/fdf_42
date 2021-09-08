@@ -45,7 +45,7 @@ static void	set_map(int *ideal, char *line)
 	i = 0;
 	while (split[i++])
 	{
-		ideal[i] = ft_atoi(ideal[i]);
+		ideal[i] = ft_atoi(split[i]);
 		free(split[i]);
 	}
 	free(split);
