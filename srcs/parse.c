@@ -15,6 +15,7 @@
 static void	set_map(int *ideal, char *line);
 static int	get_heigth(char *file);
 static int	get_width(char *file);
+static void	check_map(char *file);
 
 void	parse_map(t_fdf *info, char *file)
 {
@@ -96,4 +97,21 @@ static int	get_width(char *file)
 	free(line);
 	close(fd);
 	return (width);
+}
+
+static void	check_map(char *file)
+{
+	char	*line;
+	int		fd;
+
+	fd = open(file, O_RDONLY);
+	if (fd == -1) 
+		handle_error("open error");
+	while (get_next_line(fd, &line))
+		free(line)
+	close(fd);
+	if (line)
+		free(line);
+	else
+		handle_error("Read error");
 }

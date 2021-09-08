@@ -1,43 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   struct.h                                           :+:      :+:    :+:   */
+/*   controls.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-d <lpaulo-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/07 21:27:00 by lpaulo-d          #+#    #+#             */
-/*   Updated: 2021/09/07 21:27:00 by lpaulo-d         ###   ########.fr       */
+/*   Created: 2021/09/08 15:23:08 by lpaulo-d          #+#    #+#             */
+/*   Updated: 2021/09/08 15:23:08 by lpaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCT_H
-# define STRUCT_H
+#ifndef CONTROLS_H
+# define CONTROLS_H
 
-typedef struct s_jump
-{
-	int		x;
-	int		y;
-}	t_jump;
-
-typedef struct s_fdf
-{
-	float	angle;
-	void	*mlx_win;
-	void	*mlx;
-	void	*img_ptr;
-	char	*img_data;
-	int		width;
-	int		height;
-	int		**map;
-	int		scale;
-	int		proj;
-	int		color;
-	int		bpp;
-	int		endian;
-	int		size_line;
-	int		shift_x;
-	int		shift_y;
-	int		shift_z;
-}	t_fdf;
+#  define KEY_UP 119
+#  define KEY_DOWN 115
+#  define KEY_LEFT 97
+#  define KEY_RIGHT 100
+#  define KEY_EXIT 65307
+#  define KEY_ROTATE_LEFT 113
+#  define KEY_ROTATE_RIGHT 101
+#  define KEY_SCALE_PLUS 122
+#  define KEY_SCALE_MINUS 120
+#  define KEY_HEIGHT_PLUS 102
+#  define KEY_HEIGHT_MINUS 103
+#  define KEY_PROJ_DEF 112
+#  define KEY_PROJ_ISO 105
 
 #endif

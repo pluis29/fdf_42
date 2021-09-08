@@ -18,21 +18,14 @@ void	handle_error(char *msg)
 	exit (-1);
 }
 
-void	check_map(char *file)
+void	destroy(t_fdf *info)
 {
-	char	*line;
-	int		fd;
-
-	fd = open(file, O_RDONLY);
-	if (fd == -1) 
-		handle_error("open error");
-	while (get_next_line(fd, &line))
-		free(line)
-	close(fd);
-	if (line)
-		free(line);
-	else
-		handle_error("Read error");
+	mlx_destroy_image(info->mlx, info->img_ptr);
+	mlx_clear_window(info->mlx, info->mlx_win);
+	mlx_destroy_window(info->mlx, info->mlx_win);
+	ft_clear_map(info->map, info);
+	free(info);
+	exit(0);
 }
 
 int	**mem_map(int width, int height)
@@ -51,4 +44,25 @@ int	**mem_map(int width, int height)
 			handle_error("malloc error");
 	}
 	return (map);
+}
+
+void	putstr_mlx(char *str, int start, t_fdf *info)
+{
+	static int	height;
+
+	if (!height || start)
+		height = T_OFFSET;
+	height += T_HEIGHT;
+	mlx_string_put(info->mlx, info->mlx_win, T_OFFSET, height, T_COLOR, str);
+}
+
+void	text(t_fdf *info)
+{
+	putstr_mlx("Controls:", 1, info);
+	putstr_mlx("W/A/S/D - Move", 0, info);
+	putstr_mlx("Q/E - Rotate", 0, info);
+	putstr_mlx("Z/X - Scaling", 0, info);
+	putstr_mlx("F/G - Shift Heights", 0, info);
+	putstr_mlx("I/P - Change projection", 0, info);
+	putstr_mlx("ESC - Exit", 0, info);
 }
