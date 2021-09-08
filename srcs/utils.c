@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-d <lpaulo-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/24 16:02:30 by lpaulo-d          #+#    #+#             */
-/*   Updated: 2021/08/24 16:02:30 by lpaulo-d         ###   ########.fr       */
+/*   Created: 2021/09/07 21:29:18 by lpaulo-d          #+#    #+#             */
+/*   Updated: 2021/09/07 21:29:18 by lpaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,41 +18,37 @@ void	handle_error(char *msg)
 	exit (-1);
 }
 
-void	malloc_mtz(t_imap *imap)
+void	check_map(char *file)
 {
-	int		i;
+	char	*line;
+	int		fd;
 
-	i = 0;
-	imap->mtz = (int **)malloc(sizeof(int *) * imap->height);
-	if (!imap->mtz)
-		handle_error("Malloc error");
-	while(i < imap->height)
-	{
-		impap->mtz[i] = (int *)malloc(sizeof(int) * imap->width);
-		if(!imap->mtz[i])
-			handle_error("Malloc error");
-		i++;
-	}
+	fd = open(file, O_RDONLY);
+	if (fd == -1) 
+		handle_error("open error");
+	while (get_next_line(fd, &line))
+		free(line)
+	close(fd);
+	if (line)
+		free(line);
+	else
+		handle_error("Read error");
 }
 
-
-char	*filter(char *target)
+int	**mem_map(int width, int height)
 {
-	int		i;
-	char	*done
+	int	**map;
+	int	i;
+
+	map = malloc(sizeof(int *) * heigth);
+	if (!map)
+		handle_error("malloc error");
 	i = 0;
-	while (target[i++] != '\0')
+	while (i++ < height)
 	{
-		if (target[i] == ',' && !ft_isnumber(target[i])
-		{
-			done[i] = '\0';
-			return (done);
-		}
-		done[i] = malloc(sizeof(char) * 3);
-		if (!target[i])
+		map[i] = malloc(sizeof(int) * width)
+		if (!map[i])
 			handle_error("malloc error");
-		done[i] = target[i];
 	}
-	done[i] = '\0';
-	return(done);
+	return (map);
 }

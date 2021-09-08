@@ -5,19 +5,19 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-d <lpaulo-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/24 16:00:42 by lpaulo-d          #+#    #+#             */
-/*   Updated: 2021/08/24 16:00:42 by lpaulo-d         ###   ########.fr       */
+/*   Created: 2021/09/07 21:27:00 by lpaulo-d          #+#    #+#             */
+/*   Updated: 2021/09/07 21:27:00 by lpaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
-#define STRUCT_H
+# define STRUCT_H
 
-typedef struct	s_imap
+typedef struct s_fdf
 {
-	int		width;
 	int		height;
-	int		**mtz;
-}	t_imap;
+	int		width;
+	int		**map;
+}	t_fdf;
 
 #endif
