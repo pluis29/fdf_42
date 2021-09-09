@@ -44,6 +44,7 @@ static void	reset_map(t_fdf *fdf)
 	fdf->map.coordinate_z = 0;
 	fdf->map.coordinate_y = 0;
 	fdf->map.x_value = 1.00;
+	fdf->map.angle = M_PI / 3;
 	fdf->map.angle_y = cos(M_PI / 3);
 	fdf->map.angle_z = fdf->map.angle_y * sin(M_PI / 6);
 	if (fdf->map.width > fdf->map.height)
@@ -73,9 +74,9 @@ static int	keys(int keycode, t_fdf *fdf)
 	else if (keycode == KEY_ABNT_A)
 		fdf->map.coordinate_y -= 1;
 	else if (keycode == KEY_ABNT_Q)
-		fdf->map.angle_z += M_PI / 16;
+		fdf->map.angle += M_PI / 16;
 	else if (keycode == KEY_ABNT_E)
-		fdf->map.angle_y += M_PI / 16;
+		fdf->map.angle += M_PI / 16;
 	else if (keycode == KEY_ABNT_J)
 		fdf->map.zoom += 1;
 	else if ((keycode == KEY_ABNT_K) && (fdf->map.zoom > MAX_ZOOM))

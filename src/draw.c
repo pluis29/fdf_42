@@ -52,13 +52,15 @@ static void	draw_horizontal(t_fdf *fdf, int y, int z)
 	int		yt;
 	int		zt;
 
+	set_iso(fdf->map.y0, fdf->map.z0, fdf->map.angle);
+	set_iso(fdf->map.y1, fdf->map.z1, fdf->map.angle);
 	yt = y - fdf->map.width / 2;
 	zt = z - fdf->map.height / 2;
-	fdf->map.y0 = fdf->map.angle_y * (yt - zt) * fdf->map.zoom;
-	fdf->map.z0 = fdf->map.angle_z * (yt + zt) * fdf->map.zoom;
+	fdf->map.y0 = fdf->map.angle_y * (yt - zt * cos(angle)) * fdf->map.zoom;
+	fdf->map.z0 = fdf->map.angle_z * (yt + zt * sin(angle)) * fdf->map.zoom;
 	fdf->map.z0 -= fdf->map.values[z][y] * fdf->map.x_value;
-	fdf->map.y1 = fdf->map.angle_y * ((yt + 1) - zt) * fdf->map.zoom;
-	fdf->map.z1 = fdf->map.angle_z * ((yt + 1) + zt) * fdf->map.zoom;
+	fdf->map.y1 = fdf->map.angle_y * ((yt + 1) - zt * cos(angle)) * fdf->map.zoom;
+	fdf->map.z1 = fdf->map.angle_z * ((yt + 1) + zt * sin(angle)) * fdf->map.zoom;
 	fdf->map.z1 -= fdf->map.values[z][y + 1] * fdf->map.x_value;
 	fdf->map.y0 += (WIN_WIDTH / 2) + fdf->map.coordinate_y;
 	fdf->map.y1 += (WIN_WIDTH / 2) + fdf->map.coordinate_y;
@@ -123,4 +125,10 @@ static void	put_pixel(t_fdf *fdf, int y, int z, double uvector)
 		fdf->image.data[pos + 2] = fdf->color.blue + uvector;
 		fdf->image.data[pos + 3] = 0x7F + uvector;
 	}
+}
+
+static void	proj_iso(t_jump *p, int z)
+{
+	p->x = (int)round((p->x - p->y) * cos(angle));
+	p->y = (int)round((p->x + p->y) * sin(angle) - z);
 }
