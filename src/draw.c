@@ -12,12 +12,12 @@
 
 #include "../includes/fdf.h"
 
-static void	draw_horizontal(t_fdf *fdf, int y, int z)
-static void	draw_vertical(t_fdf *fdf, int y, int z)
-static void	draw_lines(t_fdf *fdf)
-static void	put_pixel(t_fdf *fdf, int y, int z, double uvector)
+static void	draw_horizontal(t_fdf *fdf, int y, int z);
+static void	draw_vertical(t_fdf *fdf, int y, int z);
+static void	draw_lines(t_fdf *fdf);
+static void	put_pixel(t_fdf *fdf, int y, int z, double uvector);
 
-void	draw(t_fdf *fdf)
+int	draw(t_fdf *fdf)
 {
 	int		z;
 	int		y;
@@ -41,8 +41,9 @@ void	draw(t_fdf *fdf)
 		}
 		z++;
 	}
-	mlx_put_image_to_window(fdf->mlx.init, fdf->mlx.win, fdf->mlx.image, 0 ,0);
-	mlx_destroy_iamge(fdf->mlx.init, fdf->mlx.img);
+	mlx_put_image_to_window(fdf->mlx.init, fdf->mlx.win, fdf->mlx.img, 0 ,0);
+	text(fdf);
+	mlx_destroy_image(fdf->mlx.init, fdf->mlx.img);
 	return (0);
 }
 

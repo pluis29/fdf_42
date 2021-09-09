@@ -12,10 +12,10 @@
 
 #include "../includes/fdf.h"
 
-static void	reset_map(t_fdf *fdf)
-static int	keys(int keycode, t_fdf *fdf)
-static void	random_color(t_fdf *fdf)
-static void	fdf_usage(void)
+static void	reset_map(t_fdf *fdf);
+static int	keys(int keycode, t_fdf *fdf);
+static void	random_color(t_fdf *fdf);
+void    putstr_mlx(char *str, int start, t_fdf *fdf);
 
 int main(int ac, char **av)
 {
@@ -24,20 +24,17 @@ int main(int ac, char **av)
 	fdf = (t_fdf *)malloc(sizeof(t_fdf));
 	if (!fdf)
 		handle_error("Malloc failed");
-	if (ac == 2)
-	{
-		parse(av[1], fdf);
-		reset_map(fdf);
-		fdf->mlx.init = mlx();
-		fdf->mlx.win = mlx_new_window(fdf->mlx.init, WIN_WIDTH, WIN_HEIGHT, 
-			"42_FDF");
-		mlx_hook(fdf->mlx.win, 2, 3, keys, fdf);
-		mlx_loop_hook(fdf->mlx.init, draw, fdf);
-		mlx_loop(fdf->mlx.init);
-	}
-	else
-		fdf_usage();
-	destroy(fdf->map.values);
+	if (ac != 2)
+		handle_error("Usage invalid: ./fdf ./maps/...");
+	parse(av[1], fdf);
+	reset_map(fdf);
+	fdf->mlx.init = mlx_init();
+	fdf->mlx.win = mlx_new_window(fdf->mlx.init, WIN_WIDTH, WIN_HEIGHT, 
+		"42_FDF");
+	mlx_hook(fdf->mlx.win, 2, 3, keys, fdf);
+	mlx_loop_hook(fdf->mlx.init, draw, fdf);
+	mlx_loop(fdf->mlx.init);	
+	destroy((void **)fdf->map.values);
 	free(fdf);
 	return (0);
 }
@@ -62,31 +59,32 @@ static void	reset_map(t_fdf *fdf)
 static int	keys(int keycode, t_fdf *fdf)
 {
 	if (keycode == KEY_ESCAPE)
-		ft_exit(fdf);
-	else if (keycode == KEY_ANSI_R)
+		destroy((void **)fdf);
+	else if (keycode == KEY_ABNT_R)
 		reset_map(fdf);
-	else if (keycode == KEY_ANSI_T)
+	else if (keycode == KEY_ABNT_T)
 		random_color(fdf);
-	else if (keycode == KEY_ANSI_W)
+	else if (keycode == KEY_ABNT_W)
 		fdf->map.coordinate_z -= 1;
-	else if (keycode == KEY_ANSI_S)
+	else if (keycode == KEY_ABNT_S)
 		fdf->map.coordinate_z += 1;
-	else if (keycode == KEY_ANSI_D)
+	else if (keycode == KEY_ABNT_D)
 		fdf->map.coordinate_y += 1;
-	else if (keycode == KEY_ANSI_A)
+	else if (keycode == KEY_ABNT_A)
 		fdf->map.coordinate_y -= 1;
-	else if (keycode == KEY_ANSI_J)
+	else if (keycode == KEY_ABNT_J)
 		fdf->map.zoom += 1;
-	else if ((keycode == KEY_ANSI_K) && (fdf->map.zoom > MAX_ZOOM))
+	else if ((keycode == KEY_ABNT_K) && (fdf->map.zoom > MAX_ZOOM))
 		fdf->map.zoom -= 1;
-	else if ((keycode == KEY_ANSI_U) && (fdf->map.x_value < MAX_X))
+	else if ((keycode == KEY_ABNT_U) && (fdf->map.x_value < MAX_X))
 		fdf->map.x_value += 0.25;
-	else if ((keycode == KEY_ANSI_I) && (fdf->map.x_value > -MAX_X))
+	else if ((keycode == KEY_ABNT_I) && (fdf->map.x_value > -MAX_X))
 		fdf->map.x_value -= 0.25;
 	else if (keycode == KEY_SPACE)
 		key_space(fdf);
 	return (0);
 }
+
 
 static void	random_color(t_fdf *fdf)
 {
@@ -95,18 +93,12 @@ static void	random_color(t_fdf *fdf)
 	fdf->color.blue = (rand() % 0x7F);
 }
 
-static void	fdf_usage(void)
+void    putstr_mlx(char *str, int start, t_fdf *fdf)
 {
-	ft_putstr_fd("Usage:\n\t", 1);
-	ft_putstr_fd("FDF", 1);
-	ft_putstr_fd("fdf_file\n", 1);
-	ft_putstr_fd("Controls:\n", 1);
-	ft_putstr_fd("\t[Esc]        -> Exit the program.\n", 1);
-	ft_putstr_fd("\t[R]          -> Reset the map.\n", 1);
-	ft_putstr_fd("\t[T]          -> Colorize this shit!.\n", 1);
-	ft_putstr_fd("\t[J][K]       -> Zoom in and zoom out.\n", 1);
-	ft_putstr_fd("\t[U][I]       -> Spiky time!\n", 1);
-	ft_putstr_fd("\t[Space]      -> Change the camera(isometric  \
-		<-> plain).\n", 1);
-	ft_putstr_fd("\t[W][A][S][D] -> Move the map.\n", 1);
+    static int    height;
+
+    if (!height || start)
+        height = T_OFFSET;
+    height += T_HEIGHT;
+    mlx_string_put(fdf->mlx.init, fdf->mlx.win, T_OFFSET, height, T_COLOR, str);
 }

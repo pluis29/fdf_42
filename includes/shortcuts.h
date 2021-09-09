@@ -13,17 +13,17 @@
 #ifndef SHORTCUTS_H
 # define SHORTCUTS_H
 
-# define KEY_SPACE			  		(0X31)
-# define KEY_ESCAPE			 		(0X35)
-# define KEY_ANSI_R			 		(0X0F)
-# define KEY_ANSI_T			 		(0X11)
-# define KEY_ANSI_A			 		(0X00)
-# define KEY_ANSI_D			 		(0X02)
-# define KEY_ANSI_S			 		(0X01)
-# define KEY_ANSI_W			 		(0X0D)
-# define KEY_ANSI_J			 		(0X26)
-# define KEY_ANSI_K			 		(0X28)
-# define KEY_ANSI_U			 		(0X20)
-# define KEY_ANSI_I			 		(0X22)
+# define KEY_SPACE                      (0x20)
+# define KEY_ESCAPE                     (0xff1b)
+# define KEY_ABNT_R                     (0x72)
+# define KEY_ABNT_T                     (0x74)
+# define KEY_ABNT_A                     (0x61)
+# define KEY_ABNT_D                     (0x64)
+# define KEY_ABNT_S                     (0x73)
+# define KEY_ABNT_W                     (0x77)
+# define KEY_ABNT_J                     (0x6a)
+# define KEY_ABNT_K                     (0x6b)
+# define KEY_ABNT_U                     (0x75)
+# define KEY_ABNT_I                     (0x69)
 
 #endif

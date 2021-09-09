@@ -13,13 +13,6 @@
 #ifndef STRUCT_H
 #define STRUCT_H
 
-typedef struct s_fdf
-{
-	t_mlx	mlx;
-	t_map	map;
-	t_image	image;
-	t_color	color;
-}	t_fdf;
 
 typedef struct s_color
 {
@@ -60,5 +53,13 @@ typedef struct s_map
 	double	angle_y;
 	double	angle_z;
 }	t_map;
+
+typedef struct s_fdf
+{
+	t_mlx	mlx;
+	t_map	map;
+	t_image	image;
+	t_color	color;
+}	t_fdf;
 
 #endif

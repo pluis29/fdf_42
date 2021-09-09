@@ -20,8 +20,10 @@ void	parse(char *file, t_fdf *fdf)
 {
 	char	*line;
 	int		fd;
+	int		y;
+	int		z;
 
-	count_line(fdf, file);
+	get_info(fdf, file);
 	fd = open(file, O_RDONLY);
 	if (!fd)
 		handle_error("Open error");
@@ -46,7 +48,7 @@ void	parse(char *file, t_fdf *fdf)
 
 static void	set_map(t_fdf *fdf, int y, int z, char *line)
 {
-	char	*split;
+	char	**split;
 	int		i;
 
 	split = ft_split(line, ' ');
@@ -98,13 +100,13 @@ static int get_values(char *line)
 	{
 		if (ft_isdigit(*line))
 		{
-			len++;
+			len += 1;
 			while (ft_isdigit(*line))
-				line++;
+				line += 1;
 		}
-		else if (*line != ' ' && *line != '-')
-			handle_error("Invalid characters or read error");
-		line++;
+		//else if (*line == ' ' || *line == '-')
+		//	handle_error("Invalid characters or read error");
+		line += 1;
 	}
 	return (len);
 }

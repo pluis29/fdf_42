@@ -12,7 +12,7 @@
 
 PATH_MLX = ./minilibx-linux/
 PATH_LIBFT = ./libft/
-PATH_SRCS = ./srcs/
+PATH_SRCS = ./src/
 PATH_GNL = ./get_next_line/
 LIBFT = $(PATH_LIBFT)libft.a
 MLX = $(PATH_MLX)libmlx.a
