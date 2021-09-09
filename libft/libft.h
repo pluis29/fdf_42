@@ -6,7 +6,7 @@
 /*   By: lpaulo-d <lpaulo-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 14:58:46 by lpaulo-d          #+#    #+#             */
-/*   Updated: 2021/09/08 16:54:28 by lpaulo-d         ###   ########.fr       */
+/*   Updated: 2021/06/01 23:20:02 by lpaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,5 @@ char	*ft_strtrim(char const *s1, char const *set);
 char	**ft_split(char const *s, char c);
 char	*ft_itoa(int n);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
-int		ft_abs(int value);
-int		ft_nbrcmp(const int n1, const int n2);
 
 #endif

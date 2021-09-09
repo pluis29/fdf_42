@@ -5,39 +5,60 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaulo-d <lpaulo-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/07 21:27:00 by lpaulo-d          #+#    #+#             */
-/*   Updated: 2021/09/07 21:27:00 by lpaulo-d         ###   ########.fr       */
+/*   Created: 2021/09/08 19:59:40 by lpaulo-d          #+#    #+#             */
+/*   Updated: 2021/09/08 19:59:40 by lpaulo-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
-# define STRUCT_H
-
-typedef struct s_jump
-{
-	int		x;
-	int		y;
-}	t_jump;
+#define STRUCT_H
 
 typedef struct s_fdf
 {
-	float	angle;
-	void	*mlx_win;
-	void	*mlx;
-	void	*img_ptr;
-	char	*img_data;
+	t_mlx	mlx;
+	t_map	map;
+	t_image	image;
+	t_color	color;
+}	t_fdf;
+
+typedef struct s_color
+{
+	int		red;
+	int		green;
+	int		blue;
+}	t_color;
+
+typedef struct s_mlx
+{
+	void	*init;
+	void	*win;
+	void	*img;
+}				t_mlx;
+
+typedef struct s_image
+{
+	char	*data;
+	int		size;
+	int		endian;
+	int		bpp;
+}				t_image;
+
+typedef struct s_map
+{
 	int		width;
 	int		height;
-	int		**map;
-	int		scale;
-	int		proj;
-	int		color;
-	int		bpp;
-	int		endian;
-	int		size_line;
-	int		shift_x;
-	int		shift_y;
-	int		shift_z;
-}	t_fdf;
+	int		**values;
+	int		coordinate_y;
+	int		coordinate_z;
+	int		y0;
+	int		y1;
+	int		z0;
+	int		z1;
+	int		zoom;
+	int		isometric;
+	double	x_value;
+	double	angle_y;
+	double	angle_z;
+}	t_map;
 
 #endif
