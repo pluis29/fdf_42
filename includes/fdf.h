@@ -42,5 +42,6 @@ int		main(int ac, char **av);
 int 	draw(t_fdf *fdf);
 void	text(t_fdf *fdf);
 void    putstr_mlx(char *str, int start, t_fdf *fdf);
+int	close_win(t_fdf *fdf);
 
 #endif

@@ -15,6 +15,7 @@
 static void	set_map(t_fdf *fdf, int y, int z, char *line);
 static void	get_info(t_fdf *fdf, char *file);
 static int get_values(char *line);
+int	close_win(t_fdf *fdf);
 
 void	parse(char *file, t_fdf *fdf)
 {
@@ -104,9 +105,16 @@ static int get_values(char *line)
 			while (ft_isdigit(*line))
 				line += 1;
 		}
-		//else if (*line == ' ' || *line == '-')
-		//	handle_error("Invalid characters or read error");
-		line += 1;
+		else if (*line == ' ' || *line == '-')
+			line += 1;
+		else
+			handle_error("Invalid characters or read error");
 	}
 	return (len);
+}
+
+int	close_win(t_fdf *fdf)
+{
+	mlx_destroy_window(fdf->mlx.init, fdf->mlx.win);
+	exit(0);
 }

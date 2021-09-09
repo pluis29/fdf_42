@@ -31,10 +31,10 @@ int main(int ac, char **av)
 	fdf->mlx.init = mlx_init();
 	fdf->mlx.win = mlx_new_window(fdf->mlx.init, WIN_WIDTH, WIN_HEIGHT, 
 		"42_FDF");
+	mlx_hook(fdf->mlx.win, 17, 0, close_win, fdf);
 	mlx_hook(fdf->mlx.win, 2, 3, keys, fdf);
 	mlx_loop_hook(fdf->mlx.init, draw, fdf);
 	mlx_loop(fdf->mlx.init);	
-	destroy((void **)fdf->map.values);
 	free(fdf);
 	return (0);
 }
@@ -59,7 +59,7 @@ static void	reset_map(t_fdf *fdf)
 static int	keys(int keycode, t_fdf *fdf)
 {
 	if (keycode == KEY_ESCAPE)
-		destroy((void **)fdf);
+		mlx_destroy_window(fdf->mlx.init, fdf->mlx.win);
 	else if (keycode == KEY_ABNT_R)
 		reset_map(fdf);
 	else if (keycode == KEY_ABNT_T)
@@ -72,10 +72,6 @@ static int	keys(int keycode, t_fdf *fdf)
 		fdf->map.coordinate_y += 1;
 	else if (keycode == KEY_ABNT_A)
 		fdf->map.coordinate_y -= 1;
-	else if (keycode == KEY_ABNT_Q)
-		fdf->map.angle += M_PI / 16;
-	else if (keycode == KEY_ABNT_E)
-		fdf->map.angle += M_PI / 16;
 	else if (keycode == KEY_ABNT_J)
 		fdf->map.zoom += 1;
 	else if ((keycode == KEY_ABNT_K) && (fdf->map.zoom > MAX_ZOOM))

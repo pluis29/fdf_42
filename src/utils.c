@@ -34,9 +34,7 @@ void	destroy(void **str)
 
 	i = 0;
 	while (str[i])
-		i++;
-	while (i >= 0)
-		free(str[i--]);
+		free(str[i]);
 }
 
 void	key_space(t_fdf *fdf)

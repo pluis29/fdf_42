@@ -24,7 +24,7 @@ SRC = $(FILES:.c=.o)
 
 NAME = fdf
 CC = clang
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra #-fsanitize=address
 MFLAGS = -I $(PATH_MLX) -L $(PATH_MLX) -lmlx -Ilmlx -lXext -lX11 -lm
 
 all: $(NAME)
