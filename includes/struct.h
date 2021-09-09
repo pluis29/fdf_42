@@ -52,7 +52,6 @@ typedef struct s_map
 	double	x_value;
 	double	angle_y;
 	double	angle_z;
-	double	angle;
 }	t_map;
 
 typedef struct s_fdf

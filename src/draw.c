@@ -16,7 +16,6 @@ static void	draw_horizontal(t_fdf *fdf, int y, int z);
 static void	draw_vertical(t_fdf *fdf, int y, int z);
 static void	draw_lines(t_fdf *fdf);
 static void	put_pixel(t_fdf *fdf, int y, int z, double uvector);
-static void	proj_iso(t_jump *p, float angle, int z);
 
 int	draw(t_fdf *fdf)
 {
@@ -53,8 +52,6 @@ static void	draw_horizontal(t_fdf *fdf, int y, int z)
 	int		yt;
 	int		zt;
 
-	set_iso(fdf->map.y0, fdf->map.z0, fdf->map.angle);
-	set_iso(fdf->map.y1, fdf->map.z1, fdf->map.angle);
 	yt = y - fdf->map.width / 2;
 	zt = z - fdf->map.height / 2;
 	fdf->map.y0 = fdf->map.angle_y * (yt - zt) * fdf->map.zoom;
@@ -98,7 +95,6 @@ static void	draw_lines(t_fdf *fdf)
 	double	delta_z;
 	double	uvector;
 
-	proj_iso(fdf);
 	y = fdf->map.y0;
 	z = fdf->map.z0;
 	delta_y = fdf->map.y1 - fdf->map.y0;
@@ -106,6 +102,7 @@ static void	draw_lines(t_fdf *fdf)
 	uvector = sqrt((pow(delta_y, 2)) + (pow(delta_z, 2)));
 	delta_y /= uvector;
 	delta_z /= uvector;
+	
 	while (uvector > 0)
 	{
 		put_pixel(fdf, y, z, uvector);
@@ -113,12 +110,6 @@ static void	draw_lines(t_fdf *fdf)
 		z += delta_z;
 		uvector -= 1;
 	}
-}
-
-static void	proj_iso(t_fdf *fdf)
-{
-	fdf->map.z0 = (int)round((fdf->map.z0 - fdf->map.y0) * cos(angle));
-	fdf->map.y0 = (int)round((fdf->map.z0 + fdf->map.y0) * sin(angle));
 }
 
 static void	put_pixel(t_fdf *fdf, int y, int z, double uvector)
@@ -133,10 +124,4 @@ static void	put_pixel(t_fdf *fdf, int y, int z, double uvector)
 		fdf->image.data[pos + 2] = fdf->color.blue + uvector;
 		fdf->image.data[pos + 3] = 0x7F + uvector;
 	}
-}
-
-static void	proj_iso(t_jump *p, int z)
-{
-	p->x = (int)round((p->x - p->y) * cos(angle));
-	p->y = (int)round((p->x + p->y) * sin(angle) - z);
 }

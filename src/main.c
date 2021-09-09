@@ -44,7 +44,6 @@ static void	reset_map(t_fdf *fdf)
 	fdf->map.coordinate_z = 0;
 	fdf->map.coordinate_y = 0;
 	fdf->map.x_value = 1.00;
-	fdf->map.angle = M_PI / 3;
 	fdf->map.angle_y = cos(M_PI / 3);
 	fdf->map.angle_z = fdf->map.angle_y * sin(M_PI / 6);
 	if (fdf->map.width > fdf->map.height)

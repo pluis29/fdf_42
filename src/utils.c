@@ -51,7 +51,6 @@ void	text(t_fdf *fdf)
 {
 	putstr_mlx("Controls:", 1, fdf);
     putstr_mlx("W/A/S/D - Move", 0, fdf);
-    putstr_mlx(" - Rotate", 0, fdf);
     putstr_mlx("J/K - Zoom", 0, fdf);
     putstr_mlx("U/I - Shift Heights", 0, fdf);
     putstr_mlx("Space - Change projection", 0, fdf);

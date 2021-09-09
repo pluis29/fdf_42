@@ -25,5 +25,7 @@
 # define KEY_ABNT_K                     (0x6b)
 # define KEY_ABNT_U                     (0x75)
 # define KEY_ABNT_I                     (0x69)
+# define KEY_ABNT_Q                     (0x71)
+# define KEY_ABNT_E                    (0x65)
 
 #endif
